@@ -1,0 +1,7 @@
+CHANGELOG
+LICENSE
+README
+Rakefile
+lib/simple_uuid.rb
+test/test_uuid.rb
+Manifest
