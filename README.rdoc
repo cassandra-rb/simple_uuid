@@ -1,0 +1,31 @@
+
+= simple_uuid
+
+Simple, scalable UUID generation.
+
+== License
+
+Copyright 2009-2010 Twitter, Inc. See included LICENSE file. 
+
+== Features
+
+* pure-Ruby
+* no MAC address scraping
+* no file-based locking
+
+This library implements UUID format version 1, as specified in {RFC 4122}[http://www.ietf.org/rfc/rfc4122.txt], with jitter in place of the mac address and sequence counter.
+
+== Installation
+
+Install the gem:
+  sudo gem install simple_uuid
+  
+== Usage
+
+TBD...
+
+== Reporting problems
+
+The support forum is here[http://github.com/ryanking/simple_uuid/issues].
+
+Patches and contributions are very welcome.
