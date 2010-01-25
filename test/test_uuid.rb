@@ -26,10 +26,16 @@ class UUIDTest < Test::Unit::TestCase
   def test_types_behave_well
     assert !(UUID.new() == false)
   end
-  
+
   def test_uuid_casting_error
     assert_raises(TypeError) do
       UUID.new({})
     end
+  end
+
+  def test_equality
+    a = UUID.new
+    b = a.dup
+    assert_equal a, b
   end
 end

@@ -112,20 +112,17 @@ class UUID
     }" + (long ? ", version: #{version}, variant: #{variant}, guid: #{to_guid}>" :  ">")
   end
 
+  def to_s
+    @bytes
+  end
+  alias bytes to_s
+
   def hash
     @bytes.hash
   end
 
   def eql?(other)
-    other.is_a?(Comparable) and @bytes == other.to_s
-  end    
-
-  def ==(other)
-    other.respond_to?(:to_i) && self.to_i == other.to_i
-  end
-
-  def to_s
-    @bytes
+    other.respond_to?(:bytes) && bytes == other.bytes
   end
 
   private
