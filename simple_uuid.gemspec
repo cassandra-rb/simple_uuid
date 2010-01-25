@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{simple_uuid}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan King"]
   s.cert_chain = ["/Users/ryan/.gemkeys/gem-public_cert.pem"]
-  s.date = %q{2010-01-20}
+  s.date = %q{2010-01-25}
   s.description = %q{Simple UUID generation.}
   s.email = %q{ryan@twitter.com}
   s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README", "lib/simple_uuid.rb"]
