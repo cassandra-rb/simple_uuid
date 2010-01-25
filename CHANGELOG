@@ -1,1 +1,3 @@
+v0.0.2 Update equality test for compatibility with Cassandra gem.
+
 v0.0.1 Initial extraction from the cassandra gem.
