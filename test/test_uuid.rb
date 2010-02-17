@@ -1,5 +1,6 @@
 require 'test/unit'
 require 'simple_uuid'
+include SimpleUUID
 
 class UUIDTest < Test::Unit::TestCase
   def test_uuid_sort
