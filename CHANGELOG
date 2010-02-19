@@ -1,4 +1,4 @@
-v.next move UUID class into a SimpleUUID module
+v0.1.0 move UUID class into a SimpleUUID module
 
 v0.0.2 Update equality test for compatibility with Cassandra gem.
 
