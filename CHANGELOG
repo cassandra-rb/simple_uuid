@@ -1,3 +1,5 @@
+v0.1.2 add license file
+
 v0.1.1 fix problem with ruby 1.9 [Aanand Prasad]
 
 v0.1.0 move UUID class into a SimpleUUID module
