@@ -39,4 +39,13 @@ class UUIDTest < Test::Unit::TestCase
     b = a.dup
     assert_equal a, b
   end
+
+  def test_comparison
+    current_uuid = UUID.new(Time.now)
+    future_uuid = UUID.new(Time.now + rand(60))
+
+    assert current_uuid < future_uuid
+    assert current_uuid >= current_uuid
+    assert future_uuid >= current_uuid
+  end
 end
