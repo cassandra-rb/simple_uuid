@@ -11,6 +11,7 @@ end
 module SimpleUUID
   # UUID format version 1, as specified in RFC 4122, with jitter in place of the mac address and sequence counter.
   class UUID
+    include Comparable
 
     class InvalidVersion < StandardError #:nodoc:
     end
