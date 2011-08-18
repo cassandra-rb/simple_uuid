@@ -127,14 +127,17 @@ module SimpleUUID
       other.respond_to?(:bytes) && bytes == other.bytes
     end
 
+    # Given raw bytes, return a time object
     def self.to_time(bytes)
       Time.at(total_usecs(bytes) / 1000000.0)
     end
     
+    # Return a time object
     def to_time
       self.class.to_time(@bytes)
     end
     
+    # Given raw bytes, return the total_usecs
     def self.total_usecs(bytes)
       elements = bytes.unpack("NnnQ")
       (elements[0] + (elements[1] << 32) + ((elements[2] & 0x0FFF) << 48) - GREGORIAN_EPOCH_OFFSET) / 10
