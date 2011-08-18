@@ -106,7 +106,7 @@ module SimpleUUID
 
     def inspect(long = false)
       "<UUID##{object_id} time: #{
-        Time.at(seconds).inspect
+        to_time.inspect
       }, usecs: #{
         usecs
       } jitter: #{
@@ -127,11 +127,23 @@ module SimpleUUID
       other.respond_to?(:bytes) && bytes == other.bytes
     end
 
-    private
-
-    def total_usecs
-      elements = @bytes.unpack("NnnQ")
+    def self.to_time(bytes)
+      Time.at(total_usecs(bytes) / 1000000.0)
+    end
+    
+    def to_time
+      self.class.to_time(@bytes)
+    end
+    
+    def self.total_usecs(bytes)
+      elements = bytes.unpack("NnnQ")
       (elements[0] + (elements[1] << 32) + ((elements[2] & 0x0FFF) << 48) - GREGORIAN_EPOCH_OFFSET) / 10
+    end
+
+    private
+    
+    def total_usecs
+      self.class.total_usecs(@bytes)
     end
   end
 end
