@@ -129,12 +129,13 @@ module SimpleUUID
 
     # Given raw bytes, return a time object
     def self.to_time(bytes)
-      Time.at(total_usecs(bytes) / 1000000.0)
+      usecs = total_usecs(bytes)
+      Time.at(usecs / 1_000_000, usecs % 1_000_000)
     end
     
     # Return a time object
     def to_time
-      self.class.to_time(@bytes)
+      Time.at(total_usecs / 1_000_000, total_usecs % 1_000_000)
     end
     
     # Given raw bytes, return the total_usecs
@@ -146,7 +147,7 @@ module SimpleUUID
     private
     
     def total_usecs
-      self.class.total_usecs(@bytes)
+      @total_usecs ||= self.class.total_usecs(@bytes)
     end
   end
 end
