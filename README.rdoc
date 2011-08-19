@@ -22,7 +22,13 @@ Install the gem:
   
 == Usage
 
-TBD...
+  # Creating and getting a timestamp from the UUID
+  uuid = SimpleUUID::UUID.new => <UUID#2278170300  .... >
+  uuid.to_time => Thu Aug 18 19:15:16 -0400 2011
+
+  # Given raw bytes from a source such as cassandra (using bytes from an existing UUID as an example)
+  bytes = SimpleUUID::UUID.new.bytes
+  SimpleUUID::UUID.to_time(bytes) => Thu Aug 18 19:15:16 -0400 2011
 
 == Reporting problems
 

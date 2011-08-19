@@ -48,4 +48,15 @@ class UUIDTest < Test::Unit::TestCase
     assert current_uuid >= current_uuid
     assert future_uuid >= current_uuid
   end
+  
+  def test_to_time
+    ts = Time.new
+    uuid = UUID.new(ts)
+    assert_equal ts, uuid.to_time
+  end
+  
+  def test_total_usecs
+    uuid = UUID.new
+    assert_equal uuid.send(:total_usecs), UUID.total_usecs(uuid.bytes)
+  end
 end
