@@ -140,7 +140,7 @@ module SimpleUUID
     
     # Given raw bytes, return the total_usecs
     def self.total_usecs(bytes)
-      elements = bytes.unpack("NnnQ")
+      elements = bytes.unpack("Nnn")
       (elements[0] + (elements[1] << 32) + ((elements[2] & 0x0FFF) << 48) - GREGORIAN_EPOCH_OFFSET) / 10
     end
 
