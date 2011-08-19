@@ -1,3 +1,5 @@
+v0.2.0 perf optimizations for cassandra cql
+
 v0.1.2 add license file
 
 v0.1.1 fix problem with ruby 1.9 [Aanand Prasad]
