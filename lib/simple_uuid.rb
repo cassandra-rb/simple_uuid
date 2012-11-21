@@ -20,7 +20,7 @@ module SimpleUUID
 
     VARIANT = 0b1000_0000_0000_0000
 
-    def initialize(bytes = nil, opts = nil)
+    def initialize(bytes = nil, opts = {})
       case bytes
       when self.class # UUID
         @bytes = bytes.to_s
@@ -55,7 +55,7 @@ module SimpleUUID
         ]
 
         # Top 3 bytes reserved
-        if opts && opts[:jitter] == false
+        if opts[:jitter] == false
           byte_array += [
             0 | VARIANT,
             0,
