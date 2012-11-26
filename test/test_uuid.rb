@@ -64,6 +64,6 @@ class UUIDTest < Test::Unit::TestCase
     t = Time.now
 
     assert_not_equal UUID.new(t), UUID.new(t)
-    assert_equal UUID.new(t, jitter: false), UUID.new(t, jitter: false)
+    assert_equal UUID.new(t, randomize: false), UUID.new(t, randomize: false)
   end
 end

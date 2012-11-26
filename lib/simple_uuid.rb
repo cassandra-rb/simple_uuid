@@ -55,7 +55,7 @@ module SimpleUUID
         ]
 
         # Top 3 bytes reserved
-        if opts[:jitter] == false
+        if opts[:randomize] == false
           byte_array += [
             0 | VARIANT,
             0,
