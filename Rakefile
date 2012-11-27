@@ -6,5 +6,5 @@ Echoe.new('simple_uuid') do |e|
   e.email = 'ryan@twitter.com'
   e.rubygems_version = ">= 0.8"
   e.project = "fauna"
-#  e.retain_gemspec = true
+  e.retain_gemspec = true
 end
