@@ -4,4 +4,5 @@ Manifest
 README.rdoc
 Rakefile
 lib/simple_uuid.rb
+simple_uuid.gemspec
 test/test_uuid.rb
