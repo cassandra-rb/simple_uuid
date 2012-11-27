@@ -1,3 +1,5 @@
+v0.3.0 Add option `:randomize` to turn off the random part of the UUID
+
 v0.2.0 perf optimizations for cassandra cql
 
 v0.1.2 add license file
