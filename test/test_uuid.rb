@@ -59,4 +59,11 @@ class UUIDTest < Test::Unit::TestCase
     uuid = UUID.new
     assert_equal uuid.send(:total_usecs), UUID.total_usecs(uuid.bytes)
   end
+
+  def test_no_jitter
+    t = Time.now
+
+    assert_not_equal UUID.new(t), UUID.new(t)
+    assert_equal UUID.new(t, randomize: false), UUID.new(t, randomize: false)
+  end
 end

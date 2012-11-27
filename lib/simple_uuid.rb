@@ -20,7 +20,7 @@ module SimpleUUID
 
     VARIANT = 0b1000_0000_0000_0000
 
-    def initialize(bytes = nil)
+    def initialize(bytes = nil, opts = {})
       case bytes
       when self.class # UUID
         @bytes = bytes.to_s
@@ -48,16 +48,28 @@ module SimpleUUID
       when NilClass, Time
         time = (bytes || Time).stamp * 10 + GREGORIAN_EPOCH_OFFSET
         # See http://github.com/spectra/ruby-uuid/
-        @bytes = [
+        byte_array = [
           time & 0xFFFF_FFFF,
           time >> 32,
           ((time >> 48) & 0x0FFF) | 0x1000,
-          # Top 3 bytes reserved
-          rand(2**13) | VARIANT,
-          rand(2**16),
-          rand(2**32)
-        ].pack("NnnnnN")
+        ]
 
+        # Top 3 bytes reserved
+        if opts[:randomize] == false
+          byte_array += [
+            0 | VARIANT,
+            0,
+            0
+          ]
+        else
+          byte_array += [
+            rand(2**13) | VARIANT,
+            rand(2**16),
+            rand(2**32)
+          ]
+        end
+
+        @bytes = byte_array.pack("NnnnnN")
       else
         raise TypeError, "Expected #{bytes.inspect} to cast to a #{self.class} (unknown source class)"
       end
