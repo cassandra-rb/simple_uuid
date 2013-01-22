@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.24"
   s.summary = "Simple, scalable UUID generation."
   s.test_files = ["test/test_uuid.rb"]
+  s.licenses = ['Apache']
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
