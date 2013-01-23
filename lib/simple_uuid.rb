@@ -27,7 +27,7 @@ module SimpleUUID
       when String
         case bytes.size
         when 16 # Raw byte array
-          @bytes = bytes
+          @bytes = bytes.respond_to?(:force_encoding) ? bytes.force_encoding("ASCII-8BIT") : bytes
         when 36 # Human-readable UUID representation; inverse of #to_guid
           elements = bytes.split("-")
           raise TypeError, "Expected #{bytes.inspect} to cast to a #{self.class} (malformed UUID representation)" if elements.size != 5

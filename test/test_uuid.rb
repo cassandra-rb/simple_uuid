@@ -17,6 +17,15 @@ class UUIDTest < Test::Unit::TestCase
     assert_equal uuid, UUID.new(uuid.to_i)
     assert_equal uuid, UUID.new(uuid.to_guid)
   end
+  
+  def test_equality_with_encoding
+    return unless "".respond_to? :force_encoding
+    
+    utf8_uuid_bytes = "\xFD\x17\x1F\xA6=O\x11\xE2\x92\x13pV\x81\xBB\x05\x87".force_encoding("UTF-8")
+    binary_uuid_bytes = "\xFD\x17\x1F\xA6=O\x11\xE2\x92\x13pV\x81\xBB\x05\x87".force_encoding("ASCII-8BIT")
+    
+    assert_equal UUID.new(utf8_uuid_bytes), UUID.new(binary_uuid_bytes)
+  end
 
   def test_uuid_error
     assert_raises(TypeError) do
