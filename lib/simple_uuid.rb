@@ -56,11 +56,19 @@ module SimpleUUID
 
         # Top 3 bytes reserved
         if opts[:randomize] == false
-          byte_array += [
-            0 | VARIANT,
-            0,
-            0
-          ]
+          byte_array += if !opts[:salt].nil?
+            clock_h, clock_l, node_h, node_l =
+              opts[:salt].to_s.unpack("CCnN")
+
+            clock = [
+              clock_h | VARIANT,
+              clock_l
+            ].pack("n").unpack("n").first
+
+            [ clock, node_h, node_l ]
+          else
+            [ 0 | VARIANT, 0, 0 ]
+          end
         else
           byte_array += [
             rand(2**13) | VARIANT,
