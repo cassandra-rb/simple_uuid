@@ -1,5 +1,7 @@
 require 'test/unit'
+require 'digest/md5'
 require 'simple_uuid'
+
 include SimpleUUID
 
 class UUIDTest < Test::Unit::TestCase
@@ -25,6 +27,20 @@ class UUIDTest < Test::Unit::TestCase
     binary_uuid_bytes = "\xFD\x17\x1F\xA6=O\x11\xE2\x92\x13pV\x81\xBB\x05\x87".force_encoding("ASCII-8BIT")
     
     assert_equal UUID.new(utf8_uuid_bytes), UUID.new(binary_uuid_bytes)
+  end
+
+  def test_salt
+    tnow = Time.now
+    salt =  Digest::MD5.new.update("some salt")
+    tthen = Time.now
+
+    uuid1 = UUID.new(tnow, :randomize => false, :salt => salt.digest)
+    uuid2 = UUID.new(tthen, :randomize => false, :salt => salt.digest)
+
+    assert_equal uuid1.to_time, tnow
+    assert_equal uuid2.to_time, tthen
+    assert_equal uuid1.bytes[8..-1], uuid2.bytes[8..-1]
+    assert uuid2 > uuid1
   end
 
   def test_uuid_error
