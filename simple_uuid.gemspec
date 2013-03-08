@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = "ryan@twitter.com"
   s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README.rdoc", "lib/simple_uuid.rb"]
   s.files = ["CHANGELOG", "LICENSE", "Manifest", "README.rdoc", "Rakefile", "lib/simple_uuid.rb", "simple_uuid.gemspec", "test/test_uuid.rb"]
-  s.homepage = "http://fauna.github.com/fauna/simple_uuid/"
+  s.homepage = "https://github.com/ryanking/simple_uuid"
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Simple_uuid", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "fauna"
