@@ -117,11 +117,15 @@ module SimpleUUID
     end
 
     def <=>(other)
-      total_usecs <=> other.send(:total_usecs)
-    end
-
-    def ==(other)
-      to_s == other.to_s
+      me = to_s.unpack('Nn2C*')
+      him = other.to_s.unpack('Nn2C*')
+      # swap most significant time bits to front
+      me[0], me[2], him[0], him[2] = me[2], me[0], him[2], him[0]
+      me.zip(him) do |m, h|
+        comp = m <=> h
+        return comp if comp != 0
+      end
+      return 0
     end
 
     def inspect(long = false)

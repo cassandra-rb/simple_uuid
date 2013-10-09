@@ -19,13 +19,13 @@ class UUIDTest < Test::Unit::TestCase
     assert_equal uuid, UUID.new(uuid.to_i)
     assert_equal uuid, UUID.new(uuid.to_guid)
   end
-  
+
   def test_equality_with_encoding
     return unless "".respond_to? :force_encoding
-    
+
     utf8_uuid_bytes = "\xFD\x17\x1F\xA6=O\x11\xE2\x92\x13pV\x81\xBB\x05\x87".force_encoding("UTF-8")
     binary_uuid_bytes = "\xFD\x17\x1F\xA6=O\x11\xE2\x92\x13pV\x81\xBB\x05\x87".force_encoding("ASCII-8BIT")
-    
+
     assert_equal UUID.new(utf8_uuid_bytes), UUID.new(binary_uuid_bytes)
   end
 
@@ -73,13 +73,13 @@ class UUIDTest < Test::Unit::TestCase
     assert current_uuid >= current_uuid
     assert future_uuid >= current_uuid
   end
-  
+
   def test_to_time
     ts = Time.new
     uuid = UUID.new(ts)
     assert_equal ts, uuid.to_time
   end
-  
+
   def test_total_usecs
     uuid = UUID.new
     assert_equal uuid.send(:total_usecs), UUID.total_usecs(uuid.bytes)
@@ -90,5 +90,22 @@ class UUIDTest < Test::Unit::TestCase
 
     assert_not_equal UUID.new(t), UUID.new(t)
     assert_equal UUID.new(t, randomize: false), UUID.new(t, randomize: false)
+  end
+
+  def test_identical_times
+    t = Time.now
+    u1 = UUID.new(t)
+    u2 = UUID.new(t)
+
+    assert_not_equal u1, u2
+    assert_equal u1, UUID.new(u1) # sanity
+    assert_not_equal 0, u1 <=> u2
+    assert_equal u1.to_time, u2.to_time
+
+    if u1.to_s[-8, 8] > u2.to_s[-8, 8]
+      assert u1 > u2
+    else
+      assert u2 > u1
+    end
   end
 end
