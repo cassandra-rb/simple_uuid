@@ -32,6 +32,6 @@ Install the gem:
 
 == Reporting problems
 
-The support forum is here[http://github.com/ryanking/simple_uuid/issues].
+The support forum is here[http://github.com/cassandra-rb/simple_uuid/issues].
 
 Patches and contributions are very welcome.

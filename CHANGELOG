@@ -1,13 +1,24 @@
-v0.3.0 Add option `:randomize` to turn off the random part of the UUID
+v0.4.0
+- Fix comparison of time UUIDs (@muirmanders, #13)
+- Moved to the cassandra-rb github project
 
-v0.2.0 perf optimizations for cassandra cql
+v0.3.0
+- Add option `:randomize` to turn off the random part of the UUID
 
-v0.1.2 add license file
+v0.2.0
+- perf optimizations for cassandra cql
 
-v0.1.1 fix problem with ruby 1.9 [Aanand Prasad]
+v0.1.2
+- add license file
 
-v0.1.0 move UUID class into a SimpleUUID module
+v0.1.1
+- fix problem with ruby 1.9 [Aanand Prasad]
 
-v0.0.2 Update equality test for compatibility with Cassandra gem.
+v0.1.0
+- move UUID class into a SimpleUUID module
 
-v0.0.1 Initial extraction from the cassandra gem.
+v0.0.2
+- Update equality test for compatibility with Cassandra gem.
+
+v0.0.1
+- Initial extraction from the cassandra gem.
