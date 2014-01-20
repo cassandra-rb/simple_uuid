@@ -108,4 +108,14 @@ class UUIDTest < Test::Unit::TestCase
       assert u2 > u1
     end
   end
+
+  def test_dont_crash_on_frozen_bytes
+    uuid = UUID.new
+    hash = {
+      uuid.to_s => Time.now
+    }
+    # collect freezes the key values as you iterate
+    objectified = hash.collect {|k,v| UUID.new(k) }
+    assert_equal uuid, objectified[0]
+  end
 end
