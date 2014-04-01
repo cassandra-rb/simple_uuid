@@ -28,6 +28,10 @@ module SimpleUUID
         case bytes.size
         when 16 # Raw byte array
           @bytes = bytes
+          if @bytes.encoding != Encoding::BINARY
+            @bytes = @bytes.dup if @bytes.frozen?
+            @bytes.force_encoding(Encoding::BINARY)
+          end
         when 36 # Human-readable UUID representation; inverse of #to_guid
           elements = bytes.split("-")
           raise TypeError, "Expected #{bytes.inspect} to cast to a #{self.class} (malformed UUID representation)" if elements.size != 5
@@ -102,10 +106,13 @@ module SimpleUUID
     end
 
     def to_guid
-      elements = @bytes.unpack("NnnCCa6")
-      node = elements[-1].unpack('C*')
-      elements[-1] = '%02x%02x%02x%02x%02x%02x' % node
-      "%08x-%04x-%04x-%02x%02x-%s" % elements
+      if @guid.nil?
+        elements = @bytes.unpack("NnnCCa6")
+        node = elements[-1].unpack('C*')
+        elements[-1] = '%02x%02x%02x%02x%02x%02x' % node
+        @guid = "%08x-%04x-%04x-%02x%02x-%s" % elements
+      end
+      return @guid.dup
     end
 
     def seconds
@@ -150,6 +157,7 @@ module SimpleUUID
     def eql?(other)
       other.respond_to?(:bytes) && bytes == other.bytes
     end
+    alias == eql?
 
     # Given raw bytes, return a time object
     def self.to_time(bytes)
